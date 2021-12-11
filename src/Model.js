@@ -8,7 +8,7 @@ const color = new THREE.Color()
 export default function Model({ scroll, ...props }) {
   const t = useRef(0)
   const group = useRef()
-  const { nodes, materials, animations } = useGLTF("/model6.glb")
+  const { nodes, materials, animations } = useGLTF("/model7.glb")
   const { actions, mixer } = useAnimations(animations, group)
   const [hovered, set] = useState()
   const extras = { receiveShadow: true, castShadow: true, "material-envMapIntensity": 0.2 }
@@ -36,14 +36,20 @@ export default function Model({ scroll, ...props }) {
         onPointerOut={(e) => (e.stopPropagation(), set(null))}
         position={[0.06, 4.04, 0.35]}
         scale={[0.25, 0.25, 0.25]}>
-        <mesh name="Headphones" geometry={nodes.Headphones.geometry} material={materials.M_Headphone} {...extras} />
-        <mesh name="Notebook" geometry={nodes.Notebook.geometry} material={materials.M_Notebook} {...extras} />
-        <mesh name="Rocket003" geometry={nodes.Rocket003.geometry} material={materials.M_Rocket} {...extras} />
-        <mesh name="Roundcube001" geometry={nodes.Roundcube001.geometry} material={materials.M_Roundcube} {...extras} />
-        <mesh name="Table" geometry={nodes.Table.geometry} material={materials.M_Table} {...extras} />
-        <mesh name="VR_Headset" geometry={nodes.VR_Headset.geometry} material={materials.M_Headset} {...extras} />
-        <mesh name="Ob" geometry={nodes.r5_50x2_1.geometry} material={materials.White} {...extras} />
-        <mesh name="Zeppelin" geometry={nodes.Zeppelin.geometry} material={materials.M_Zeppelin} v />
+        {/*<mesh name="Headphones" geometry={nodes.Headphones.geometry} material={materials.M_Headphone} {...extras} />*/}
+        {/*<mesh name="Notebook" geometry={nodes.Notebook.geometry} material={materials.M_Notebook} {...extras} />*/}
+        {/*<mesh name="Rocket003" geometry={nodes.Rocket003.geometry} material={materials.M_Rocket} {...extras} />*/}
+       {/* <mesh name="Roundcube001" geometry={nodes.Roundcube001.geometry} material={materials.M_Roundcube} {...extras} />*/}
+        {/*<mesh name="Table" geometry={nodes.Table.geometry} material={materials.M_Table} {...extras} />*/}
+        {/*<mesh name="VR_Headset" geometry={nodes.VR_Headset.geometry} material={materials.M_Headset} {...extras} />*/}
+        <mesh name="Ob" geometry={nodes.ob1geo.geometry} material={materials.White} {...extras} /> 
+        <mesh name="Ob2" geometry={nodes.ob2geo.geometry} material={materials.Bottom} {...extras} /> 
+        <mesh name="Ob3" geometry={nodes.ob3geo.geometry} material={materials.L6} {...extras} /> 
+        <mesh name="Ob4" geometry={nodes.ob4geo.geometry} material={materials.L6a} {...extras} /> 
+        <mesh name="Ob5" geometry={nodes.ob5geo.geometry} material={materials.L5} {...extras} /> 
+        <mesh name="Ob6" geometry={nodes.ob6geo.geometry} material={materials.White6} {...extras} /> 
+        <mesh name="Ob7" geometry={nodes.ob7geo.geometry} material={materials.L6b} {...extras} /> 
+        {/*<mesh name="Zeppelin" geometry={nodes.Zeppelin.geometry} material={materials.M_Zeppelin} v />*/}
       </group>
       <group name="Camera" position={[-1.78, 2.04, 23.58]} rotation={[1.62, 0.01, 0.11]}>
         <PerspectiveCamera makeDefault far={100} near={0.1} fov={28} rotation={[-Math.PI / 2, 0, 0]}>
@@ -65,4 +71,4 @@ export default function Model({ scroll, ...props }) {
   )
 }
 
-useGLTF.preload("/model6.glb")
+useGLTF.preload("/model7.glb")
