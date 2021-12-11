@@ -8,7 +8,7 @@ const color = new THREE.Color()
 export default function Model({ scroll, ...props }) {
   const t = useRef(0)
   const group = useRef()
-  const { nodes, materials, animations } = useGLTF("/model4.glb")
+  const { nodes, materials, animations } = useGLTF("/model6.glb")
   const { actions, mixer } = useAnimations(animations, group)
   const [hovered, set] = useState()
   const extras = { receiveShadow: true, castShadow: true, "material-envMapIntensity": 0.2 }
@@ -42,6 +42,7 @@ export default function Model({ scroll, ...props }) {
         <mesh name="Roundcube001" geometry={nodes.Roundcube001.geometry} material={materials.M_Roundcube} {...extras} />
         <mesh name="Table" geometry={nodes.Table.geometry} material={materials.M_Table} {...extras} />
         <mesh name="VR_Headset" geometry={nodes.VR_Headset.geometry} material={materials.M_Headset} {...extras} />
+        <mesh name="Ob" geometry={nodes.r5_50x2_1.geometry} material={materials.White} {...extras} />
         <mesh name="Zeppelin" geometry={nodes.Zeppelin.geometry} material={materials.M_Zeppelin} v />
       </group>
       <group name="Camera" position={[-1.78, 2.04, 23.58]} rotation={[1.62, 0.01, 0.11]}>
@@ -64,4 +65,4 @@ export default function Model({ scroll, ...props }) {
   )
 }
 
-useGLTF.preload("/model.glb")
+useGLTF.preload("/model6.glb")
