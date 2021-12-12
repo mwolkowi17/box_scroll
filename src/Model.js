@@ -8,19 +8,20 @@ const color = new THREE.Color()
 export default function Model({ scroll, ...props }) {
   const t = useRef(0)
   const group = useRef()
-  const { nodes, materials, animations } = useGLTF("/model7.glb")
+  const { nodes, materials, animations } = useGLTF("/model7.glb");
+  const fullGroup = useGLTF("/model7.glb");
   const { actions, mixer } = useAnimations(animations, group)
   const [hovered, set] = useState()
   const extras = { receiveShadow: true, castShadow: true, "material-envMapIntensity": 0.2 }
   useEffect(() => void (actions["CameraAction.005"].play().paused = true), [])
-  useEffect(() => {
+  /*useEffect(() => {
     if (hovered) group.current.getObjectByName(hovered).material.color.set("white")
     document.body.style.cursor = hovered ? "pointer" : "auto"
-  }, [hovered])
+  }, [hovered])*/
   useFrame((state) => {
     actions["CameraAction.005"].time = THREE.MathUtils.lerp(actions["CameraAction.005"].time, actions["CameraAction.005"].getClip().duration * scroll.current, 0.05)
     group.current.children[0].children.forEach((child, index) => {
-      child.material.color.lerp(color.set(hovered === child.name ? "tomato" : "#202020").convertSRGBToLinear(), hovered ? 0.1 : 0.05)
+      //child.material.color.lerp(color.set(hovered === child.name ? "tomato" : "#202020").convertSRGBToLinear(), hovered ? 0.1 : 0.05)
       const et = state.clock.elapsedTime
       child.position.y = Math.sin((et + index * 2000) / 2) * 1
       child.rotation.x = Math.sin((et + index * 2000) / 3) / 10
@@ -32,8 +33,8 @@ export default function Model({ scroll, ...props }) {
   return (
     <group ref={group} {...props} dispose={null}>
       <group
-        onPointerOver={(e) => (e.stopPropagation(), set(e.object.name))}
-        onPointerOut={(e) => (e.stopPropagation(), set(null))}
+       // onPointerOver={(e) => (e.stopPropagation(), set(e.object.name))}
+        //onPointerOut={(e) => (e.stopPropagation(), set(null))}
         position={[0.06, 4.04, 0.35]}
         scale={[0.25, 0.25, 0.25]}>
         {/*<mesh name="Headphones" geometry={nodes.Headphones.geometry} material={materials.M_Headphone} {...extras} />*/}
@@ -42,10 +43,14 @@ export default function Model({ scroll, ...props }) {
        {/* <mesh name="Roundcube001" geometry={nodes.Roundcube001.geometry} material={materials.M_Roundcube} {...extras} />*/}
         {/*<mesh name="Table" geometry={nodes.Table.geometry} material={materials.M_Table} {...extras} />*/}
         {/*<mesh name="VR_Headset" geometry={nodes.VR_Headset.geometry} material={materials.M_Headset} {...extras} />*/}
-        <mesh name="Ob" geometry={nodes.ob1geo.geometry} material={materials.White} {...extras} /> 
-        <mesh name="Ob2" geometry={nodes.ob2geo.geometry} material={materials.Bottom} {...extras} /> 
-        <mesh name="Ob3" geometry={nodes.ob3geo.geometry} material={materials.L6} {...extras} /> 
-        <mesh name="Ob4" geometry={nodes.ob4geo.geometry} material={materials.L6a} {...extras} /> 
+        {/* imprtant place*/}
+        <primitive name="Ob" object={fullGroup.nodes.ob1geo} /> 
+        <primitive name="Ob2" object={fullGroup.nodes.ob2} /> 
+        {/*<mesh name="Ob2" geometry={nodes.ob2geo.geometry} material={materials.Bottom} {...extras} /> */}
+        <primitive name="Ob3" object={fullGroup.nodes.ob3} /> 
+        {/*<mesh name="Ob3" geometry={nodes.ob3geo.geometry} material={materials.L6} {...extras} /> */}
+        <primitive name="Ob4" object={fullGroup.nodes.ob4} /> 
+        {/*<mesh name="Ob4" geometry={nodes.ob4geo.geometry} material={materials.L6a} {...extras} /> */}
         <mesh name="Ob5" geometry={nodes.ob5geo.geometry} material={materials.L5} {...extras} /> 
         <mesh name="Ob6" geometry={nodes.ob6geo.geometry} material={materials.White6} {...extras} /> 
         <mesh name="Ob7" geometry={nodes.ob7geo.geometry} material={materials.L6b} {...extras} /> 
@@ -71,4 +76,4 @@ export default function Model({ scroll, ...props }) {
   )
 }
 
-useGLTF.preload("/model7.glb")
+useGLTF.preload("/model8.glb")
