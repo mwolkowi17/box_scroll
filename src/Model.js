@@ -8,8 +8,8 @@ const color = new THREE.Color()
 export default function Model({ scroll, ...props }) {
   const t = useRef(0)
   const group = useRef()
-  const { nodes, materials, animations } = useGLTF("/model7.glb");
-  const fullGroup = useGLTF("/model7.glb");
+  const { nodes, materials, animations } = useGLTF("/model9.glb");
+  const fullGroup = useGLTF("/model9.glb");
   const { actions, mixer } = useAnimations(animations, group)
   const [hovered, set] = useState()
   const extras = { receiveShadow: true, castShadow: true, "material-envMapIntensity": 0.2 }
@@ -44,16 +44,19 @@ export default function Model({ scroll, ...props }) {
         {/*<mesh name="Table" geometry={nodes.Table.geometry} material={materials.M_Table} {...extras} />*/}
         {/*<mesh name="VR_Headset" geometry={nodes.VR_Headset.geometry} material={materials.M_Headset} {...extras} />*/}
         {/* imprtant place*/}
-        <primitive name="Ob" object={fullGroup.nodes.ob1geo} /> 
+        <primitive name="Ob" object={fullGroup.nodes.ob1} /> 
         <primitive name="Ob2" object={fullGroup.nodes.ob2} /> 
         {/*<mesh name="Ob2" geometry={nodes.ob2geo.geometry} material={materials.Bottom} {...extras} /> */}
         <primitive name="Ob3" object={fullGroup.nodes.ob3} /> 
         {/*<mesh name="Ob3" geometry={nodes.ob3geo.geometry} material={materials.L6} {...extras} /> */}
         <primitive name="Ob4" object={fullGroup.nodes.ob4} /> 
         {/*<mesh name="Ob4" geometry={nodes.ob4geo.geometry} material={materials.L6a} {...extras} /> */}
-        <mesh name="Ob5" geometry={nodes.ob5geo.geometry} material={materials.L5} {...extras} /> 
-        <mesh name="Ob6" geometry={nodes.ob6geo.geometry} material={materials.White6} {...extras} /> 
-        <mesh name="Ob7" geometry={nodes.ob7geo.geometry} material={materials.L6b} {...extras} /> 
+        <primitive name="Ob5" object={fullGroup.nodes.ob5} /> 
+        {/*<mesh name="Ob5" geometry={nodes.ob5geo.geometry} material={materials.L5} {...extras} /> */}
+        <primitive name="Ob6" object={fullGroup.nodes.ob6} />
+        {/*<mesh name="Ob6" geometry={nodes.ob6geo.geometry} material={materials.White6} {...extras} /> */}
+        <primitive name="Ob7" object={fullGroup.nodes.ob7} />
+        {/*<mesh name="Ob7" geometry={nodes.ob7geo.geometry} material={materials.L6b} {...extras} /> */}
         {/*<mesh name="Zeppelin" geometry={nodes.Zeppelin.geometry} material={materials.M_Zeppelin} v />*/}
       </group>
       <group name="Camera" position={[-1.78, 2.04, 23.58]} rotation={[1.62, 0.01, 0.11]}>
@@ -76,4 +79,4 @@ export default function Model({ scroll, ...props }) {
   )
 }
 
-useGLTF.preload("/model8.glb")
+useGLTF.preload("/model9.glb")
